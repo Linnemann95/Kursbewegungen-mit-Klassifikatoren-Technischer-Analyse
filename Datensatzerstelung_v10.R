@@ -97,13 +97,12 @@ Fusion_d$Intervall <- "Täglich"
 rm(alle)
 
 # Bereinigung der Datensätze -> Inkikatoren sonst nicht berechenbar
-# Entfernt alle Zeilen, bei denen der Wert von `volume` 0 ist
-
+# Entfernt alle Zeilen, bei denen der Wert von "volume" 0 ist
 Fusion_d <- Fusion_d |> 
   drop_na() |>   # Entfernt alle Zeilen mit NAs
   filter(volume != 0)  
 
-# Berechnung der technischen Indikatoren
+# Berechnung der technischen Indikatoren -> mit Mutate und den Funktionen aus Tidyquant
 Fusion_d <- Fusion_d |>  
   group_by(symbol) |> 
   na.omit() |> 
@@ -136,7 +135,7 @@ Fusion_d <- Fusion_d |>
 ) |> 
   na.omit()
 
-# Im Datensatz unnötige Variablen entfernen
+# Im Datensatz nur die nötigen Variablen auswählen
 Fusion_d <- Fusion_d %>%
   select(symbol, date, open, high, low, close, volume, adjusted, Intervall,
          SMA_10, SMA_20, SMA_50, WMA_10, WMA_20, WMA_50,EMA_10, EMA_20, EMA_50,
@@ -155,7 +154,7 @@ min_max_scaler <- function(x) {
 abc <- c(5,1,5,7,8)
 min_max_scaler(abc)
 
-# Skalierung der Variablen mit der Funktion 
+# Skalierung der Variablen mit der function vom mit maxscaler
 Fusion_d <- Fusion_d %>%
   group_by(symbol) %>%
   mutate(
@@ -226,12 +225,11 @@ library(rpivotTable)
 pivot <- as.tibble(Fusion_g) |> 
   select(symbol, Kursbewegung_Folgeperiode, Intervall, volume)
   
+rpivotTable(data = pivot)
 
-rpivotTable::rpivotTable(data = pivot)
-
-# Abspeichern des Datensatzes als excel
+# Abspeichern des Datensatzes als excel, falls gewünscht
 library(openxlsx)
 write.xlsx(Fusion_g, "Fusion_g.xlsx")
 
-# Alle Inputs zur Kontrolle!
+# Alle Indikatoren zur Kontrolle
 SMA_10+SMA_20+SMA_50+WMA_10+WMA_20+WMA_50+EMA_10+EMA_20+EMA_50+MACD_Linie+ADX+Williams_R_14+Stoch_K+Stoch_D+ROC+RSI+OBV+CMF+VWAP_10+VWAP_20+VWAP_50,
