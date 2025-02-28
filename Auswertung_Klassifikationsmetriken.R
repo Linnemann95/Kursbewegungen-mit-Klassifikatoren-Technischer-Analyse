@@ -51,27 +51,27 @@ metriken_quantile <- metriken_alle %>%
   group_by(Klassifikator) %>%
   summarise(
     q1_genauigkeit = quantile(Genauigkeit, 0.25),
-    q2_genauigkeit = quantile(Genauigkeit, 0.50), # Median
+    q2_genauigkeit = quantile(Genauigkeit, 0.50),
     q3_genauigkeit = quantile(Genauigkeit, 0.75),
     
     q1_fehlerrate = quantile(Fehlerrate, 0.25),
-    q2_fehlerrate = quantile(Fehlerrate, 0.50), # Median
+    q2_fehlerrate = quantile(Fehlerrate, 0.50), 
     q3_fehlerrate = quantile(Fehlerrate, 0.75),
     
     q1_Präzision = quantile(Präzision, 0.25),
-    q2_Präzision = quantile(Präzision, 0.50), # Median
+    q2_Präzision = quantile(Präzision, 0.50), 
     q3_Präzision = quantile(Präzision, 0.75),
     
     q1_sensitivitaet = quantile(Sensitivität, 0.25),
-    q2_sensitivitaet = quantile(Sensitivität, 0.50), # Median
+    q2_sensitivitaet = quantile(Sensitivität, 0.50), 
     q3_sensitivitaet = quantile(Sensitivität, 0.75),
     
     q1_spezifitaet = quantile(Spezifität, 0.25),
-    q2_spezifitaet = quantile(Spezifität, 0.50), # Median
+    q2_spezifitaet = quantile(Spezifität, 0.50),
     q3_spezifitaet = quantile(Spezifität, 0.75),
     
     q1_f1score = quantile(F1_Wert, 0.25),
-    q2_f1score = quantile(F1_Wert, 0.50), # Median
+    q2_f1score = quantile(F1_Wert, 0.50), 
     q3_f1score = quantile(F1_Wert, 0.75)
     
   )
