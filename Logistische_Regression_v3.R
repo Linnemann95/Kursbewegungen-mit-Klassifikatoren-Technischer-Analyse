@@ -85,7 +85,7 @@ for (i in 1:length(trainings_daten)) {
       Vorhergesagter_Wert = vorhersagen         
     )
   
-  # Speichere die Ergebnisse in die Liste
+  #wird später für die Trading strategie gebraucht!!
   vorhersagen_liste_lr[[aktien_namen[i]]] <- vorhersage_ergebnis
   
 }
