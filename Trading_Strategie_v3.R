@@ -2,7 +2,6 @@
 ##################
 ##################
 
-
 #Strategie für jede Aktie berechnen
 #Leere Liste erstelen -> map2 nimmt die vorhersagen aus den modellen, aber berechnung erfolgt natürlicch getrennt nach Aktie, da sonst nur gibberish rauskommt
 strategie_ergebnisse_rf <- map2(vorhersagen_liste_rf, aktien_namen, function(daten, name) {
@@ -35,9 +34,6 @@ strategie_gesamt_rf <- bind_rows(strategie_ergebnisse_rf) %>%
 
 # Ergebnis ausgeben
 print(strategie_gesamt_rf)
-
-
-
 
 # Strategie für NB exakt wie oben daher keine kommentare
 ##################
@@ -72,9 +68,6 @@ strategie_gesamt_nb <- bind_rows(strategie_ergebnisse_nb) %>%
 # Ergebnis ausgeben
 print(strategie_gesamt_nb)
 
-
-
-
 # Strategie für lr
 ##################
 ##################
@@ -107,7 +100,6 @@ strategie_gesamt_lr <- bind_rows(strategie_ergebnisse_lr) %>%
 
 print(strategie_gesamt_lr)
 
-
 # Strategie für Dummy
 ##################
 ##################
@@ -139,8 +131,6 @@ strategie_gesamt_dummy <- bind_rows(strategie_ergebnisse_dummy) %>%
   )
 
 print(strategie_gesamt_dummy)
-
-
 
 ###################################################
 #Zusammenführung der Datensätze der Klassifikatoren
