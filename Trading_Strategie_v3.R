@@ -58,7 +58,6 @@ mutate(
   return(daten) 
 })
 
-#Alle Aktien-Daten zusammenfügen und eine spalte "RF" erzeugen für Random forest
 strategie_gesamt_nb <- bind_rows(strategie_ergebnisse_nb) %>%
   mutate(
     Klassifikator = "NB",  
@@ -91,7 +90,6 @@ mutate(
   return(daten) 
 })
 
-#Alle Aktien-Daten zusammenfügen und eine spalte "RF" erzeugen für Random forest
 strategie_gesamt_lr <- bind_rows(strategie_ergebnisse_lr) %>%
   mutate(
     Klassifikator = "LR",  
@@ -123,7 +121,6 @@ mutate(
   return(daten) 
 })
 
-#Alle Aktien-Daten zusammenfügen und eine spalte "RF" erzeugen für Random forest
 strategie_gesamt_dummy <- bind_rows(strategie_ergebnisse_dummy) %>%
   mutate(
     Klassifikator = "DU",  
