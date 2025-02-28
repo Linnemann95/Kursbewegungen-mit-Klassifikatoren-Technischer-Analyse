@@ -65,13 +65,13 @@ for (i in 1:length(trainings_daten)) {
       (cm$byClass['Pos Pred Value'] + cm$byClass['Sensitivity'])
   )
   
-  # Ergebnis mit dem entsprechenden Namen speichern
+  #Ergebnis mit dem entsprechenden Namen speichern
   aktien_name <- aktien_namen[i]
   results[[aktien_name]] <- list(model = model, confusion_matrix = cm)
   vip_liste[[aktien_name]] <- vi
   metriken_liste[[aktien_name]] <- metriken
   
-  # Vorhersagen speichern, wird später gebraucht für die trading strategie
+  #Vorhersagen speichern, wird später gebraucht für die trading strategie
   vorhersage_ergebnis <- tibble(
     Aktienname = aktien_namen[i],
     Tatsächlicher_Wert = test_daten[[i]]$Kursbewegung_Folgeperiode,
@@ -79,7 +79,7 @@ for (i in 1:length(trainings_daten)) {
   )
   
   vorhersage_ergebnis <- test_daten[[i]] %>%
-    select(date, open, high, low, close, Rendite_Folgetag, Kursbewegung_Folgeperiode) %>%  # Wähle gewünschte Spalten aus
+    select(date, open, high, low, close, Rendite_Folgetag, Kursbewegung_Folgeperiode) %>% 
     mutate(
       Aktienname = aktien_namen[i],              
       Vorhergesagter_Wert = vorhersagen         
@@ -91,11 +91,10 @@ for (i in 1:length(trainings_daten)) {
 }
 
 
-
-# Alle Metriken zusammenführen
+#Alle Metriken in der liste speichern
 gesamtmetriken <- do.call(rbind, metriken_liste)
 
-# Durchschnittswerte der Metriken berechnen
+#Durchschnittswerte der Metriken berechnen
 durchschnitt_metriken_lr <- gesamtmetriken %>%
   summarise(
     Durchschnitt_Genauigkeit = mean(Genauigkeitvorhersagen),
