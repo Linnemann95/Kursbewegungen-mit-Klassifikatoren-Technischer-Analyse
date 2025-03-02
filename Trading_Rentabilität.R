@@ -59,8 +59,8 @@ opportunität_aktien <- vorhersagen_zeitverlauf %>%
   group_by(Klassifikator, Aktienname) %>%
   summarise(
     
-    OP_positiv = mean(Rendite_Folgetag[Vorhergesagter_Wert == "0" & Rendite_Folgetag > 0], na.rm = TRUE)*100,
-    OP_negativ = mean(Rendite_Folgetag[Vorhergesagter_Wert == "1" & Rendite_Folgetag < 0], na.rm = TRUE)*100,
+    OP_positiv = mean(Rendite_Folgetag[Vorhergesagter_Wert == "0" & Rendite_Folgetag > 0])*100,
+    OP_negativ = mean(Rendite_Folgetag[Vorhergesagter_Wert == "1" & Rendite_Folgetag < 0])*100,
     OP_total = OP_positiv + abs(OP_negativ)/2,
     Rendite_pro_trade = mean(Portfolio_Rendite)*100,
     Rendite_pro_Trade_OP = mean(Rendite_KL_OP)*100,
@@ -72,10 +72,10 @@ opportunität_aktien <- vorhersagen_zeitverlauf %>%
     Verlust_FN = -mean(Rendite_Folgetag[Konfusion == "FN"])*100, #erlittene Verluste durch falsch negative
     
     
-    Anzahl_TP = sum(Konfusion == "TP", na.rm = TRUE),
-    Anzahl_FP = sum(Konfusion == "FP", na.rm = TRUE),
-    Anzahl_TN = sum(Konfusion == "TN", na.rm = TRUE),
-    Anzahl_FN = sum(Konfusion == "FN", na.rm = TRUE),
+    Anzahl_TP = sum(Konfusion == "TP"),
+    Anzahl_FP = sum(Konfusion == "FP"),
+    Anzahl_TN = sum(Konfusion == "TN"),
+    Anzahl_FN = sum(Konfusion == "FN"),
     Gesamt_Trades = Anzahl_TP + Anzahl_FP + Anzahl_TN + Anzahl_FN
   ) %>%
   mutate(
@@ -109,13 +109,13 @@ write.xlsx(opportunität_aktien, "Trade-Ergebnisse_alleModelle.xlsx")
 opportunität_aktien_zusammenfassung <-opportunität_aktien %>%
   group_by(Klassifikator) %>%
   summarise(
-    Rendite_pro_Trade = mean(Rendite_pro_trade, na.rm = TRUE),
+    Rendite_pro_Trade = mean(Rendite_pro_trade),
     Rendite_pro_trade_inklusive_OP = mean(Rendite_pro_Trade_OP),
-    Rendite_TP = mean(Rendite_TP, na.rm = TRUE),   
-    Verlust_FP = mean(Verlust_FP, na.rm = TRUE),   
-    Rendite_TN = mean(Rendite_TN, na.rm = TRUE),   
-    Verlust_FN = mean(Verlust_FN, na.rm = TRUE),
-    Rendite_pro_trade_inklusive_OP_alt = mean(Rendite_TP, na.rm = TRUE)+mean(Verlust_FP, na.rm = TRUE)+mean(Rendite_TN, na.rm = TRUE)+mean(Verlust_FN, na.rm = TRUE),
+    Rendite_TP = mean(Rendite_TP),   
+    Verlust_FP = mean(Verlust_FP),   
+    Rendite_TN = mean(Rendite_TN),   
+    Verlust_FN = mean(Verlust_FN),
+    Rendite_pro_trade_inklusive_OP_alt = mean(Rendite_TP)+mean(Verlust_FP)+mean(Rendite_TN)+mean(Verlust_FN),
     Gewichtete_Rendite_pro_Trade_inklusive_OP = mean(Gewichtete_Rendite_pro_Trade_inklusive_OP),
   )
 
@@ -125,7 +125,7 @@ view(opportunität_aktien_zusammenfassung)
 tägliche_rendite_bah <- vorhersagen_zeitverlauf %>%
   group_by(Aktienname) %>%
   summarize(
-    tägliche_rendite = mean(Rendite_Folgetag, na.rm = TRUE) 
+    tägliche_rendite = mean(Rendite_Folgetag) 
 
 mean(tägliche_rendite_bah$tägliche_rendite)
 
