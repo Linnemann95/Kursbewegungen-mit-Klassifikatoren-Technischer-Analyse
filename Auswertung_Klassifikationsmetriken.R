@@ -14,7 +14,7 @@ write.xlsx(metriken_alle, "metriken_alle.xlsx")
 # einlesen und umbenennen
 metriken_alle <- read.xlsx(file.choose())
 
-# Verkürzt die Namen in der Klassifikatorspalte. So ist die Weiterbearbeitung einfacher -> case_when praktisch wie eine wenn Funktion
+# Verkürzt die Namen in der Klassifikatorspalte. So ist die Weiterbearbeitung einfacher -> case_when praktisch wie eine wenn Funktion in Excel
 metriken_alle  <- metriken_alle  %>%
   mutate(Klassifikator = case_when(
     Klassifikator == "Random Forest" ~ "RF",
@@ -23,9 +23,8 @@ metriken_alle  <- metriken_alle  %>%
     Klassifikator == "Naive Bayes" ~ "NB" 
   ))
 
-
-
-metriken_alle <- as_tibble(metriken_alle)
+#Datensaatz zum Tibble machen, war aber schon tibble!? + anschauen
+metriken_alle <- as_tibble(metriken_alle) 
 view(metriken_alle)
 str(metriken_alle)
 
