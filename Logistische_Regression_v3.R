@@ -106,7 +106,7 @@ durchschnitt_metriken_lr <- gesamtmetriken %>%
   )
 
 
-# Datensatz erstellen für die gesamtmetriken 
+# Datensatz erstellen für die gesamtmetriken
 gesamtmetriken_lr <- gesamtmetriken %>%
   mutate(Aktienname = aktien_namen, .before = 1)
 
@@ -130,6 +130,7 @@ print(durchschnitt_metriken_lr)
 print(gesamtmetriken_lr, n = 40)
 view(durchschnitt_metriken_lr)
 
+#Datensatz der Ergebnisse speichern, zur Sicherheit
 write.xlsx(gesamtmetriken_lr, "gesamtmetriken_lr.xlsx")
 
 
