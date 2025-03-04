@@ -42,7 +42,7 @@ vorhersagen_liste_lr <- list()
 
 for (i in 1:length(trainings_daten)) {
   
- # Modelle glm = weil binomial, alle 
+ # Modelle glm = weil binomial, alle Indikatoren als unabhänige Variable, die Kursbewegung des nächsten Tages als abhängige Variable
  model <- glm(Kursbewegung_Folgeperiode ~  SMA_10+SMA_20+SMA_50+WMA_10+WMA_20+WMA_50+
                  EMA_10+EMA_20+EMA_50+MACD_Linie+ADX+Williams_R_14+Stoch_K+ROC+RSI+OBV+CMF+VWAP_10+VWAP_20+VWAP_50,
                  data = trainings_daten[[i]], family = "binomial")
